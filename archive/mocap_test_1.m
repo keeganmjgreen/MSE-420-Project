@@ -1,23 +1,9 @@
 im = rot90(imread('20200705_171200.jpg'), -1);
 
-X = [];
-Y = [];
+[x, y] = meshgrid(1 : size(im, 2), 1 : size(im, 1));
 
-for i = 1 : size(im, 1)
-for j = 1 : size(im, 2)
-
-    if all(im(i, j, :) == 255)
-
-        X = [X, j - 1];
-        Y = [Y, size(im, 1) - i];
-
-    end
-end
-end
-
-clear i j
-
-close
+X = x(all(im == 255, 3));
+Y = y(all(im == 255, 3));
 
 hold on
 box  on
