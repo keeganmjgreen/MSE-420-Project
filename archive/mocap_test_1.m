@@ -49,4 +49,4 @@ text(x_U, y_U, 'U', 'HorizontalAlignment', 'center', 'FontName', 'Consolas')
 text(x_K, y_K, 'K', 'HorizontalAlignment', 'center', 'FontName', 'Consolas')
 text(x_L, y_L, 'L', 'HorizontalAlignment', 'center', 'FontName', 'Consolas')
 
-print mocap_test_2_output -dpng -r600
+print mocap_test_1_output -dpng -r600
