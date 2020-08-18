@@ -1,7 +1,7 @@
 # Design of an Active Knee Exoskeleton
 
 * Read the [proposal](Project%20Proposal%20%E2%80%93%20Bionic%20Knee%20Actuator%20Device.pdf).
-* Read the [report](Project%20Proposal%20%E2%80%93%20Bionic%20Knee%20Actuator%20Device.pdf).
+* Read the [report](Project%20%E2%80%93%20Design%20of%20an%20Active%20Knee%20Exoskeleton.pdf).
 
 ## Abstract
 
