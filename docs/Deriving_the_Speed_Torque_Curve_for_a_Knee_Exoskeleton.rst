@@ -22,7 +22,7 @@ The first (inclusive) and last (not inclusive) extended indices for what would b
 
 .. admonition:: Note
 
-    Operation ``a // b`` is equivalent to ``floor(a / b)`` --- floor/integer division.
+    Operation ``a // b`` is equivalent to ``floor(a / b)`` **---** floor/integer division.
 
 All indices of the to-be-determined extended array ``arr_p`` and given noncircular array ``arr`` are computed::
 
@@ -207,8 +207,8 @@ Repeated by Row     Repeated by Column  Rep
 
 ----
 
-Option 1 --- Function get_natural_cubic_spline_model()
-------------------------------------------------------
+Option 1 **---** Function get_natural_cubic_spline_model()
+----------------------------------------------------------
 
 ::
 
@@ -228,8 +228,8 @@ A `natural cubic spline <https://en.wikipedia.org/wiki/Spline_(mathematics)#Algo
 
     `Function <https://stackoverflow.com/a/51359826>`_ ``get_natural_cubic_spline_model()`` contains classes ``AbstractSpline()`` and ``NaturalCubicSpline()`` from a *basis expansion* `module <https://github.com/madrury/basis-expansions/blob/master/basis_expansions/basis_expansions.py>`_ by `Matthew Drury <https://github.com/madrury>`_.
 
-Option 2 --- Class scipy.interpolate.UnivariateSpline()
--------------------------------------------------------
+Option 2 **---** Class scipy.interpolate.UnivariateSpline()
+-----------------------------------------------------------
 
 ::
 
@@ -307,11 +307,11 @@ Anterior = in front of the human subject.
 
 ----
 
-.. TODO: explain section 0.1.7
+.. TODO: explain section 1.7
 
 .. TODO: derive speed-torque curve envelope
 
-.. TODO: add section 0.2
+.. TODO: add section 2
 
 .. TODO: append contents to "Deriving_the_Speed_Torque_Curve_for_a_Knee_Exoskeleton.rst"
          or
@@ -557,51 +557,29 @@ Each point :math:`\small (|\tau_{K \! D}|, |\omega_{K \! D}|)` along the speed--
 
 Now using MATLAB, the speed--torque curve 'envelope' is generated:
 
-.. close
-
-.. figure('Color', 'none')
-
-.. hold on
-.. grid on
-.. box  on
-
-.. x_min =  4.7216;
-.. x_max = 56.0832;
-.. y_min =  1.3239;
-.. y_max =  4.7736;
-
-.. plot([     0, x_min ], [ y_max, y_max ], 'Color', '#087F23', 'LineWidth', 1)
-.. plot([ x_max, x_max ], [ y_min,     0 ], 'color', '#087F23', 'LineWidth', 1)
-
-.. f = @(x, y) ((x - x_min) ./ (x_max - x_min)) .^ 2 + ((y - y_min) ./ (y_max - y_min)) .^ 2 - 1;
-
-.. fimplicit(f, [x_min, x_max, y_min, y_max], 'color', '#087F23', 'LineWidth', 1)
-
-.. xlabel({'', 'Torque (N-m)', ''})
-.. ylabel({'', 'Speed (rad/s²)'})
-
-.. title({'', 'Downhill — Knee Drive', ''})
-
-.. xlim([ 0, 100 ])
-.. ylim([ 0,   5 ])
-
-.. xticks([ 0, x_max ])
-.. yticks([ 0, y_max ])
-
-.. print('ω_vs_τ_K_D''', '-dsvg')
-
 .. table::
     :align: center
 
     +--------------------------------+
     | Knee Drive Speed--Torque Curve |
     +================================+
-    | .. image:: ω_vs_τ_K_D'.svg     |
+    | .. image:: ω_vs_τ_K_D′.svg     |
     |     :align: center             |
     |     :scale: 52%                |
     +--------------------------------+
 
-**4.7736 rad/s²** and **56.0832 N-m** are the minimum required *no-load speed* and *stall torque* of the knee drive, respectively.
+**4.7738 rad/s²** and **56.0857 N-m** are the minimum required *no-load speed* and *stall torque* of the knee drive, respectively.
+
+.. table::
+    :align: center
+
+    +--------------------------------+
+    | Knee Drive Power Curves        |
+    +================================+
+    | .. image:: ω_vs_τ_K_D″.svg     |
+    |     :align: center             |
+    |     :scale: 52%                |
+    +--------------------------------+
 
 ----
 
