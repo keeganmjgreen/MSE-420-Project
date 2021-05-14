@@ -307,28 +307,28 @@ Anterior = in front of the human subject.
 
 ----
 
-.. TODO: explain section 1.7
+.. TODO: explain Section 1.7
 
-.. TODO: derive speed-torque curve envelope
+.. DONE: derive speed-torque curve envelope
 
-.. TODO: add section 2
+.. DONE: add Section 2
 
-.. TODO: append contents to "Deriving_the_Speed_Torque_Curve_for_a_Knee_Exoskeleton.rst"
+.. DONE: append contents to "Deriving_the_Speed_Torque_Curve_for_a_Knee_Exoskeleton.rst"
          or
          rename to "0.1. Downhill (_D).rst" and split "Deriving...Exoskeleton.rst" into (a) "Function my_smooth().rst"
                                                                                         (b) "Function get_xy().rst"
 
+.. _section_1:
+
 1. Downhill (_D)
 ================
-
-To-do.
 
 ::
 
     Y_U_D
     |
     Y <――――――― limb angle data
-     _U <――――― upper leg
+     _U <――――― upper leg — for example
        _D <――― decline (downhill)
 
 ===========================  ========================  ===========================  ========================
@@ -354,7 +354,7 @@ Variable Naming Convention   Meaning
 1.1. Upper Leg (_U) Angle
 -------------------------
 
-Upper leg angle data :math:`{\small Y}_\textsf{UD}` (degrees), known to be representative of :math:`n\small=37` gait cycles, is loaded from the GitHub repository::
+Upper leg angle data :math:`{\small Y}_\textsf{UD}` (degrees), known to be representative of :math:`n\small=37` gait cycles, is loaded from the `GitHub repository <https://github.com/keeganmjgreen/MSE-420-Project>`_::
 
     Y_U_D = pd.read_csv('https://raw.github.com/keeganmjgreen/MSE-420-Project/master/data/Y_U_D.csv').to_numpy()
 
@@ -555,7 +555,7 @@ Each point :math:`\small (|\tau_{K \! D}|, |\omega_{K \! D}|)` along the speed--
     writer.writerows([['abs(τq_K_D)', 'abs(ωq_K_D)']])          # headers
     writer.writerows(np.c_[abs(τq_K_D), abs(ωq_K_D)].tolist())  # columns
 
-Now using MATLAB, the speed--torque curve 'envelope' is generated:
+Now using MATLAB (:ref:`appendix`), the speed--torque curve 'envelope' is generated:
 
 .. table::
     :align: center
@@ -583,8 +583,215 @@ Now using MATLAB, the speed--torque curve 'envelope' is generated:
 
 ----
 
+2. Uphill (_I)
+==============
+
+----
+
+2.1. Upper Leg (_U) Angle
+-------------------------
+
+Upper leg angle data :math:`{\small Y}_\textsf{UI}` (degrees), known to be representative of :math:`n\small=34` gait cycles, is loaded from the `GitHub repository <https://github.com/keeganmjgreen/MSE-420-Project>`_::
+
+    Y_U_I = pd.read_csv('https://raw.github.com/keeganmjgreen/MSE-420-Project/master/data/Y_U_I.csv').to_numpy()
+
+The corresponding gait cycle periods :math:`{\small T}_{\:\!\textsf{UI}}`, gait cycle fractions (model input points) :math:`x_{q,\:\!\textsf{UI}}`, and angle data (model output points) :math:`y_{\:\!q,\:\!\textsf{UD}}` are derived::
+
+    T_U_I, xq, yq_U_I = get_xy(Y_U_I, fs, window, 34, reps, knots_per_rep, nq);  ...
+
+(At the same time, the model fit is superimposed over its plotted source data...)
+
+.. image:: y_U_I.svg
+    :align: center
+    :scale: 8%
+
+----
+
+2.2. Lower Leg (_L) Angle
+-------------------------
+
+Similarly, for the lower leg, with :math:`n\small=38` gait cycles::
+
+    Y_L_I = pd.read_csv('https://raw.github.com/keeganmjgreen/MSE-420-Project/master/data/Y_L_I.csv').to_numpy()
+
+    T_L_I, xq, yq_L_I = get_xy(Y_L_I, fs, window, 38, reps, knots_per_rep, nq);  ...
+
+.. image:: y_L_I.svg
+    :align: center
+    :scale: 8%
+
+----
+
+...and so on and so forth as in :ref:`Section 1 <section_1>`.
+
+.. ----
+.. 
+.. 2.3. Upper and Lower Leg Angles
+.. -------------------------------
+.. 
+.. To-do.
+.. 
+.. ----
+.. 
+.. 2.4. Knee (_K) Angle
+.. --------------------
+.. 
+.. To-do.
+.. 
+.. ----
+.. 
+.. 2.5. Knee Angular Velocity
+.. --------------------------
+.. 
+.. To-do.
+.. 
+.. ----
+.. 
+.. 2.6. Knee Angular Acceleration
+.. ------------------------------
+.. 
+.. To-do.
+.. 
+.. ----
+.. 
+.. 2.7. Knee Drive Speed--Torque Relationship
+.. ------------------------------------------
+.. 
+.. To-do.
+
+----
+
+.. _appendix:
+
 Appendix
 ========
 
+``MATLAB``
+
+.. code-block:: matlab
+
+    close
+
+    [x, y] = readvars('_D');
+
+    [x_max, i_x_max] = max(x);
+    [y_max, i_y_max] = max(y);
+
+    x_min = x(i_y_max);
+    y_min = y(i_x_max);
+
+    f = @(x, y) ((x - x_min) ./ (x_max - x_min)) .^ 2 + ((y - y_min) ./ (y_max - y_min)) .^ 2 - 1;
+
+    figure('Color', 'w', 'MenuBar', 'none')
+
+    box on
+    grid on
+    hold on
+
+    plot([     0, x_min ], [ y_max, y_max ], 'Color', '#087F23', 'LineWidth', 1)
+    plot([ x_max, x_max ], [ y_min,     0 ], 'color', '#087F23', 'LineWidth', 1)
+
+    fimplicit(f, [x_min, x_max, y_min, y_max], 'color', '#087F23', 'LineWidth', 1)
+
+    xlim([ 0, 100 ])
+    ylim([ 0,   5 ])
+
+    xticks([ 0, x_max ])
+    yticks([ 0, y_max ])
+
+    xlabel({'', 'Torque (N-m)', ''})
+    ylabel({'', 'Speed (rad/s²)'})
+
+    title({'', 'Downhill — Knee Drive', ''})
+
+    set(gca, 'FontName', 'Consolas')
+
+    print('ω_vs_τ_K_D′', '-dsvg')
+
+``MATLAB``
+
+.. code-block:: matlab
+
+    clearvars
+
+    [x, y] = readvars('_D');
+
+    [x_max, i_x_max] = max(x);
+    [y_max, i_y_max] = max(y);
+
+    x_new = [x_max; x(i_x_max : i_y_max); 0];
+    y_new = [0; y(i_x_max : i_y_max); y_max];
+
+    figure('Color', 'w', 'MenuBar', 'none')
+
+    % Plot speed vs torque:
+
+        subplot(2, 2, 3)
+
+        plot(x_new, y_new, 'Color', '#087F23', 'LineWidth', 1)
+
+        box off
+        grid on
+        axis equal square
+
+        xlim([0, x_max])
+        ylim([0, y_max])
+
+        xticks(xlim)
+        yticks(ylim)
+
+        yticklabels([min(ylim), "  " + max(ylim)])
+
+        xlabel({'', 'Torque (N-m)', ''})
+        ylabel('Speed (rad/s²)')
+
+        set(gca, 'FontName', 'Consolas')
+
+    % Plot speed vs power:
+
+        subplot(2, 2, 4)
+
+        plot(x_new .* y_new, y_new, 'Color', '#087F23', 'LineWidth', 1)
+
+        box off
+        grid on
+        axis equal square
+
+        ylim([0, y_max])
+
+        xticks(xlim)
+        yticks(ylim)
+
+        yticklabels('')
+
+        xlabel({'', 'Power (W)', ''})
+
+        set(gca, 'FontName', 'Consolas')
+
+    % Plot power vs torque:
+
+        subplot(2, 2, 1)
+
+        plot(x_new, x_new .* y_new, 'Color', '#087F23', 'LineWidth', 1)
+
+        box off
+        grid on
+        axis equal square
+
+        xlim([0, x_max])
+
+        xticks(xlim)
+        yticks(ylim)
+
+        xticklabels('')
+
+        ylabel('Power (W)')
+
+        set(gca, 'FontName', 'Consolas')
+
+    print('ω_vs_τ_K_D″', '-dsvg')
+
 .. image:: P_KD_Quadrants.svg
     :align: center
+
+----

@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Design of an Active Knee Exoskeleton'
-copyright = '2020, Keegan Green'
+copyright = '2021, Keegan Green'
 author = 'Keegan Green'
 
 
