@@ -1,6 +1,8 @@
 
-Design of an Active Knee Exoskeleton
-====================================
+Keegan Green · kmgreen@sfu.ca
+
+`Design of an Active Knee Exoskeleton <https://github.com/keeganmjgreen/MSE-420-Project>`_
+==========================================================================================
 
 * Read the `proposal <https://raw.github.com/keeganmjgreen/MSE-420-Project/master/Project%20Proposal%20%E2%80%94%20Bionic%20Knee%20Actuator%20Device.pdf>`_.
 * Read the `report <https://raw.github.com/keeganmjgreen/MSE-420-Project/master/Project%20%E2%80%94%20Design%20of%20an%20Active%20Knee%20Exoskeleton.pdf>`_.
@@ -17,6 +19,20 @@ An anthropometrically-adjustable, ergonomic, active knee exoskeleton is designed
 Deriving the Speed--Torque Curve for a Knee Exoskeleton
 -------------------------------------------------------
 
+Data analysis has been `redone and improved in Python <https://colab.research.google.com/drive/1f8C9Sspb2fGo5s0l91qBrioHCT2sDvNa?usp=sharing>`_, with the help of a `basis expansions module <https://github.com/madrury/basis-expansions>`_.
+
+Data was collected for the upper and lower leg angles over the course of numerous gait cycles, walking uphill and downhill. For each case, this eventually provided me and my team with the knee angle, angular velocity, angular acceleration, the torque for a backpack load, and the speed--torque curve to to match with that of a to-be-selected motor--drivetrain pair. This would be controlled to follow a moving reference/target **---** the knee angle **---** in user-selectable incline and decline operation modes. *Data analysis is documented as follows.*
+
 .. toctree::
 
     Deriving_the_Speed_Torque_Curve_for_a_Knee_Exoskeleton
+
+----
+
+.. toctree::
+
+    kneeAngleDataLogger
+    kneeAngleDataLogger_ino
+    kneeAngleDataLoggerInterface_ipynb
+
+----
