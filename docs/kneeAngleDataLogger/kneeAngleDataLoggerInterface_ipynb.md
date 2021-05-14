@@ -96,7 +96,7 @@ whichever happens first (that is, whichever the program encounters first):
 ¹ This `break` will not be reached unless the previous line, `ser = Serial(port)`, succeeds.  
 At least in this context, `break` and `pass` specifically mean 'stop trying' and 'skip error handling', respectively.
 
-<img src="https://raw.githubusercontent.com/keeganmjgreen/MSE-420-Project/master/docs/kneeAngleDataLogger/connect_2x.png" alt="connect_2x.png" style="zoom: 50%;" />  
+<img src="https://raw.githubusercontent.com/keeganmjgreen/MSE-420-Project/master/docs/kneeAngleDataLogger/connect_2x.png" alt="connect_2x.png" style="zoom:50%;" />  
 ↑ *The first possible notification.*
 
 The device may have been connected by this point, in which case the connection prompt would be withheld.  
