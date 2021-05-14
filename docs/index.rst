@@ -1,5 +1,5 @@
 
-Keegan Green · kmgreen@sfu.ca
+Keegan Green · `kmgreen@sfu.ca <kmgreen@sfu.ca>`_
 
 `Design of an Active Knee Exoskeleton <https://github.com/keeganmjgreen/MSE-420-Project>`_
 ==========================================================================================
