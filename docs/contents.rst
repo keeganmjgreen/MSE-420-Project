@@ -26,11 +26,6 @@ Data was collected for the upper and lower leg angles over the course of numerou
 .. toctree::
 
     Deriving_the_Speed_Torque_Curve_for_a_Knee_Exoskeleton
-
-----
-
-.. toctree::
-
     kneeAngleDataLogger
     kneeAngleDataLogger_ino
     kneeAngleDataLoggerInterface_ipynb
