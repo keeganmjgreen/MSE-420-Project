@@ -1,4 +1,11 @@
-""" Deriving the Speed–Torque Curve for a Knee Exoskeleton """
+# -*- coding: utf-8 -*-
+
+# Original file is located at
+#     https://colab.research.google.com/drive/1f8C9Sspb2fGo5s0l91qBrioHCT2sDvNa
+
+
+#  title: Deriving the Speed–Torque Curve for a Knee Exoskeleton
+# author: Keegan Green <kmgreen@sfu.ca>
 
 
 fs            =  100
@@ -120,10 +127,12 @@ def get_xy(Y, fs, window, cycles, reps, knots_per_rep, nq):
     return T, xq, yq
 
 
-""" 0.1. Downhill (_D) """
+# 1. Downhill (`_D`)
+# ==================
 
 
-""" 0.1.2. Upper Leg (_U) Angle """
+# 1.2. Upper Leg (`_U`) Angle
+# ---------------------------
 
 
 plt.figure()
@@ -137,7 +146,8 @@ plt.title('\n Downhill — Upper Leg \n')
 my_show('y_U_D.svg')
 
 
-""" 0.1.1. Lower Leg (_L) Angle """
+# 1.1. Lower Leg (`_L`) Angle
+# ---------------------------
 
 
 plt.figure()
@@ -151,13 +161,14 @@ plt.title('\n Downhill — Lower Leg \n')
 my_show('y_L_D.svg')
 
 
-""" 0.1.3. Upper and Lower Leg Angles """
+# 1.3. Upper and Lower Leg Angles
+# -------------------------------
 
+
+plt.figure()
 
 θq_U_D = np.roll(yq_U_D, - np.argmin(yq_U_D))
 θq_L_D = np.roll(yq_L_D, - np.argmin(yq_L_D))
-
-plt.figure()
 
 plt.plot(np.r_[xq, 1], np.r_[θq_U_D, θq_U_D[0]], color = '#BA000D')
 plt.plot(np.r_[xq, 1], np.r_[θq_L_D, θq_L_D[0]], color = '#0069C0')
@@ -172,12 +183,13 @@ plt.title('\n Downhill — Upper and Lower Leg \n')
 my_show('θ_D.svg')
 
 
-""" 0.1.4. Knee (_K) Angle """
+# 1.4. Knee (`_K`) Angle
+# ----------------------
 
-
-θq_K_D = θq_U_D - θq_L_D + 180
 
 plt.figure()
+
+θq_K_D = θq_U_D - θq_L_D + 180
 
 plt.plot(np.r_[xq, 1], np.r_[θq_K_D, θq_K_D[0]], color = '#087F23')
 
@@ -196,15 +208,16 @@ Ts_D = np.mean(np.r_[T_L_D, T_U_D]) / nq
 x = np.linspace(0, 1, 2 * nq + 1)[: -1]
 
 
-""" 0.1.5. Knee Angular Velocity """
+# 1.5. Knee Angular Velocity
+# --------------------------
 
+
+plt.figure()
 
 ωq_K_D = np.diff(np.r_[θq_K_D, θq_K_D[0]]) / Ts_D
 ωq_K_D = my_smooth(ωq_K_D, window * round(nq / fs))
 
 ω_K_D = np.interp(x, xq + 1 / (2 * nq), ωq_K_D, period = 1)
-
-plt.figure()
 
 plt.plot(np.r_[x, 1], np.r_[ω_K_D, ω_K_D[0]], color = '#087F23')
 
@@ -224,15 +237,16 @@ plt.yticks([-5, 0, 5 ])
 plt.savefig('ω_K_D.svg', format = 'svg', dpi = 300, transparent = True)  # plt.show()
 
 
-""" 0.1.6. Knee Angular Acceleration """
+# 1.6. Knee Angular Acceleration
+# ------------------------------
 
+
+plt.figure()
 
 αq_K_D = np.diff(np.r_[ωq_K_D, ωq_K_D[0]]) / Ts_D
 αq_K_D = my_smooth(αq_K_D, window * round(nq / fs))
 
 α_K_D = np.interp(x, xq + 1 / (2 * nq), αq_K_D, period = 1)
-
-plt.figure()
 
 plt.plot(np.r_[x, 1], np.r_[α_K_D, α_K_D[0]], color = '#087F23')
 
@@ -252,8 +266,11 @@ plt.yticks([-150, 0, 150 ])
 plt.savefig('α_K_D.svg', format = 'svg', dpi = 300, transparent = True)  # plt.show()
 
 
-""" 0.1.7. Knee Drive Speed–Torque Relationship """
+# 1.7. Knee Drive Speed–Torque Relationship
+# -----------------------------------------
 
+
+plt.figure()
 
 H   = 1.8
 m_B = 1.0
@@ -265,8 +282,6 @@ l_U = (0.530 - 0.285) * H
 ι_D = m_B * (l_T ** 2 + l_U ** 2 - 2 * l_T * l_U * np.cos(np.deg2rad(θq_U_D + 90)))
 
 τq_K_D = ι_D * αq_K_D + m_B * l_U * np.cos(np.deg2rad(θq_U_D)) * g
-
-plt.figure()
 
 plt.plot(abs(τq_K_D), abs(ωq_K_D), color = '#087F23')
 
@@ -284,16 +299,18 @@ plt.title('\n Downhill — Knee Drive \n')
 plt.savefig('ω_vs_τ_K_D.svg', format = 'svg', dpi = 300, transparent = True)  # plt.show()
 
 
-# writer = csv.writer(open('_D.csv', 'w', newline = ''))
+writer = csv.writer(open('_D.csv', 'w', newline = ''))
 
-# writer.writerows([['abs(τq_K_D)', 'abs(ωq_K_D)']])
-# writer.writerows(np.c_[abs(τq_K_D), abs(ωq_K_D)].tolist())
-
-
-""" 0.2. Uphill (_I) """
+writer.writerows([['abs(τq_K_D)', 'abs(ωq_K_D)']])
+writer.writerows(np.c_[abs(τq_K_D), abs(ωq_K_D)].tolist())
 
 
-""" 0.2.2. Upper Leg (_U) """
+# 2. Uphill (`_I`)
+# ================
+
+
+# 2.2. Upper Leg (`_U`) Angle
+# ---------------------------
 
 
 plt.figure()
@@ -307,11 +324,11 @@ plt.title('Uphill — Upper Leg')
 my_show('y_U_I.svg')
 
 
-""" 0.2.1. Lower Leg (_L) """
+# 2.1. Lower Leg (`_L`) Angle
+# ---------------------------
 
 
 plt.figure()
-
 
 Y_L_I = pd.read_csv('https://raw.github.com/keeganmjgreen/MSE-420-Project/master/data/Y_L_I.csv').to_numpy()
 
@@ -320,3 +337,6 @@ T_L_I, xq, yq_L_I = get_xy(Y_L_I, fs, window, 38, reps, knots_per_rep, nq)
 plt.title('Uphill — Lower Leg')
 
 my_show('y_L_I.svg')
+
+
+# (C) Copyright 2021, Keegan Green.
