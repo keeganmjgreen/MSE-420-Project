@@ -11,4 +11,4 @@ An anthropometrically-adjustable, ergonomic, active knee exoskeleton is designed
 
 Data analysis has been [redone and improved in Python](https://colab.research.google.com/drive/1f8C9Sspb2fGo5s0l91qBrioHCT2sDvNa?usp=sharing), with the help of a [basis expansions module](https://github.com/madrury/basis-expansions).
 
-[![Documentation Status](https://readthedocs.org/projects/mse-420-project/badge/?version=latest)](https://mse-420-project.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/mse-420-project/badge/?version=latest&style=for-the-badge)](https://mse-420-project.readthedocs.io/en/latest/?badge=latest)
