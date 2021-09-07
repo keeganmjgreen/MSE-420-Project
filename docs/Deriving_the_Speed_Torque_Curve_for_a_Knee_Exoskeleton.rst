@@ -2,9 +2,9 @@
 Requisites
 ==========
 
-* Numerical methods
-* Rigid body dynamics
-* Biomechanics
+- Numerical methods
+- Rigid body dynamics
+- Biomechanics
 
 ----
 
@@ -491,7 +491,7 @@ When :math:`\alpha_{\:\!\textsf{KD}}` is positive (:math:`\omega_{\:\!\textsf{KD
 .. image:: my_Experimental-setup.svg
     :align: center
 
-In this figure, the length of the topmost dashed line is assumed to be negligible. Furthermore, without knowing the shape, size, or mass distribution of a backpack and its contents, the load is approximated to be a `point mass <https://en.wikipedia.org/wiki/Point_particle#Physical_point_mass>`_ with no rotational inertia about its center.
+(The subject need not be an amputee.) In this figure, the length of the topmost dashed line is assumed to be negligible. Furthermore, without knowing the shape, size, or mass distribution of a backpack and its contents, the load is approximated to be a `point mass <https://en.wikipedia.org/wiki/Point_particle#Physical_point_mass>`_ with no rotational inertia about its center.
 
 ===========================  ========================
 Variable Naming Convention   Meaning                 
