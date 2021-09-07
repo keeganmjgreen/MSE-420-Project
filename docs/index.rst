@@ -36,9 +36,3 @@ Data was collected for the upper and lower leg angles over the course of numerou
     kneeAngleDataLoggerInterface_ipynb
 
 ----
-
-.. admonition:: Thank You
-
-    Special thanks to *Read the Docs* for removing advertising from this small personal project. I must also commend them, not for this, but for having `ethical advertising <https://docs.readthedocs.io/en/stable/advertising/ethical-advertising.html>`_.
-
-----
