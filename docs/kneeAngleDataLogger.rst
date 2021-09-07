@@ -23,7 +23,7 @@ The device consists of the following.
 - Two rechargeable LiPo batteries **---** to power the MCU and the transceiver via the MCU.
 - A mini protoboard **---** to connect the previous three electrical parts/components.
 
-.. image:: https://raw.githubusercontent.com/keeganmjgreen/MSE-420-Project/master/docs/kneeAngleDataLogger/kneeAngleDataLogger.png
+.. image:: kneeAngleDataLogger/kneeAngleDataLogger.png
 
 ❶ Generic representation of the servo motor (with a built-in but externally accessible quadrature encoder) **---** its housing and axle (❷) spanning the knee brace.
 
