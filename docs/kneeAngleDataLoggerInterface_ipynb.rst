@@ -16,7 +16,7 @@ The following fully-assembled Python module/script runs a very simple Windows UI
     import ctypes
     import tkinter as tk
     toaster = ToastNotifier()
-    port = 'COM4' # 'COM3'
+    port = 'COM4'  # 'COM3'
     try:
         ser = Serial(port, baudrate = 115_200)
     except:
@@ -56,7 +56,7 @@ The following fully-assembled Python module/script runs a very simple Windows UI
     Thread(target = connected_notifier).start()
     ctypes.windll.shcore.SetProcessDpiAwareness(True)
     window = tk.Tk()
-    #window.resizable(False, False)
+    # window.resizable(False, False)
     window.configure(bg = 'white')
     window.iconbitmap('ico/window.ico')
     window.title('RC Car Interface')
