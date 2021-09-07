@@ -9,10 +9,20 @@ Original file is located at
 **Knee Angle Data Logger Interface**
 ====================================
 
+I developed a Windows 10 interface in Python for the knee angle data logger with a wired connection to a computer. The program may be run directly by launching `kneeAngleDataLoggerInterface.pyw` or, naturally, by executing the following command.
+
+```bash
+$ python kneeAngleDataLoggerInterface.pyw
+```
+
+The interface prompts you to connect the knee angle data logger (via USB) if it has not already been connected, notifies that the device *was* connected, reads from the device over serial communication, and finally notifies that the device was disconnected (all Subsection 2). It then prepares the collected knee angle data (Subsection 3). Lastly, it makes the results accessible through a beautiful, interactive, in-browser plot (Subsection 4).
+
+These features can be broken down by going through its library imports as follows.
+
 **1. Library Imports** in Order of Appearance
 ---------------------------------------------
 
-The user is to be at least be notified that the knee angle data logger was connected and disconnected (via USB).  
+The user is to at least be notified that the knee angle data logger was connected and disconnected (via USB).  
 `win10toast` by Jithu Jacob is a Python library ([PyPI](https://pypi.org/project/win10toast/), [GitHub](https://github.com/jithurjacob/Windows-10-Toast-Notifications)) for displaying Windows 10 toast notifications.
 """
 
@@ -37,7 +47,9 @@ from serial import Serial
 import numpy  as np
 import pandas as pd
 
-"""The prepared knee angle data is to be made accessible through a beautiful, interactive, in-browser plot.  
+"""`pandas`, for instance, can be used to calculate a moving average to smooth the knee angle data.
+
+The prepared knee angle data is to be made accessible through a beautiful, interactive, in-browser plot.  
 `plotly` by the [technical computing company](https://plotly.com/) of the same name is a Python library ([PyPI](https://pypi.org/project/plotly/), [documentation](https://plotly.com/graphing-libraries/)) used to style interactive graphs.
 """
 
@@ -53,7 +65,7 @@ toaster = ToastNotifier()
 
 """This class has a `show_toast` method which is to be used. Among other arguments, it accepts a notification `title`, a notification `msg`, and an optional boolean specifying whether or not the showing of the notification (in its entire duration) is to be `threaded` ([reference](https://en.wikipedia.org/wiki/Thread_(computing))) with further Python instructions in this module (which calls `show_toast`). I found that the notification message itself (not its title) is actually optional, being truly omitted by specifying `msg` to be a non-empty 'empty' string such as `' '`. Method `show_toast` returns a boolean representing whether a notification is sent successfully or not (i.e., if one is already being shown, at least from Python). I also found that initializing multiple instances of the `ToastNotifier` class does not allow multiple corresponding notifications to appear simultaneously in the same way.
 
-Now, specify the chosen 9600/[8-N-1](https://en.wikipedia.org/wiki/8-N-1) serial communication ([COM](https://en.wikipedia.org/wiki/COM_(hardware_interface))) port:
+Now, specify the chosen 9600 / [8-N-1](https://en.wikipedia.org/wiki/8-N-1) serial communication ([COM](https://en.wikipedia.org/wiki/COM_(hardware_interface))) port:
 """
 
 port = 'COM4'
@@ -115,7 +127,7 @@ Now, check if the `ser` object is defined (i.e., if the serial port was opened):
 
 """The knee angle data logger has been connected by this point, with or without a prompt to the user.
 
-A notification that the device was connected is to be sent. I assume that an arbitrary notification may already be present, including but by no means limited to the connection prompt from before. If this is the case, it would delay the notification that the device was connected until 'timing out' (for lack of a better term). With this kind of notification, the user should know the time since its corresponding event actually occurred.
+A notification that the device was connected is to be sent. I assume that an arbitrary notification may already be present, including but by no means limited to the connection prompt from before. If this is the case, it would delay the notification that the device was connected until 'timing out' (for lack of a better term). With this kind of notification, the user should know the time since its corresponding event actually occured.
 
 As such, start a 'timer' (i.e., log the current time `connected_tick`):
 """
@@ -126,7 +138,7 @@ connected_tick = time()
 
 
 -   keep updating the suspected end time `connected_tock` and the elapsed time calculated from it,
--   keep trying to show a notification that the knee angle data logger was connected and of how long ago this event actually occurred,  
+-   keep trying to show a notification that the knee angle data logger was connected and of how long ago this event actually occured,  
     *and*
 -   keep checking if the serial port can be read from (i.e., if the device was not since disconnected),
 

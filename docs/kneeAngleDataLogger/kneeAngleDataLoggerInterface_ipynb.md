@@ -1,10 +1,20 @@
 **Knee Angle Data Logger Interface**
 ====================================
 
+I developed a Windows 10 interface in Python for the knee angle data logger with a wired connection to a computer. The program may be run directly by launching `kneeAngleDataLoggerInterface.pyw` or, naturally, by executing the following command.
+
+```bash
+$ python kneeAngleDataLoggerInterface.pyw
+```
+
+The interface prompts you to connect the knee angle data logger (via USB) if it has not already been connected, notifies that the device *was* connected, reads from the device over serial communication, and finally notifies that the device was disconnected (all [Subsection 2](https://mse-420-project.readthedocs.io/en/latest/kneeAngleDataLoggerInterface_ipynb.html#2-minimal-user-interface--reading-from-the-knee-angle-data-logger)). It then prepares the collected knee angle data ([Subsection 3](https://mse-420-project.readthedocs.io/en/latest/kneeAngleDataLoggerInterface_ipynb.html#3-preparing-the-collected-knee-angle-data)). Lastly, it makes the results accessible through a beautiful, interactive, in-browser plot ([Subsection 4](https://mse-420-project.readthedocs.io/en/latest/kneeAngleDataLoggerInterface_ipynb.html#4-making-the-results-accessible)).
+
+These features can be broken down by going through its library imports as follows.
+
 **1. Library Imports** in Order of Appearance
 ---------------------------------------------
 
-The user is to be at least be notified that the knee angle data logger was connected and disconnected (via USB).  
+The user is to at least be notified that the knee angle data logger was connected and disconnected (via USB).  
 `win10toast` by Jithu Jacob is a Python library ([PyPI](https://pypi.org/project/win10toast/), [GitHub](https://github.com/jithurjacob/Windows-10-Toast-Notifications)) for displaying Windows 10 toast notifications.
 
 ```python
@@ -34,6 +44,8 @@ import numpy  as np
 import pandas as pd
 ```
 
+`pandas`, for instance, can be used to calculate a moving average to smooth the knee angle data.
+
 The prepared knee angle data is to be made accessible through a beautiful, interactive, in-browser plot.  
 `plotly` by the [technical computing company](https://plotly.com/) of the same name is a Python library ([PyPI](https://pypi.org/project/plotly/), [documentation](https://plotly.com/graphing-libraries/)) used to style interactive graphs.
 
@@ -52,7 +64,7 @@ toaster = ToastNotifier()
 
 This class has a `show_toast` method which is to be used. Among other arguments, it accepts a notification `title`, a notification `msg`, and an optional boolean specifying whether or not the showing of the notification (in its entire duration) is to be `threaded` ([reference](https://en.wikipedia.org/wiki/Thread_(computing))) with further Python instructions in this module (which calls `show_toast`). I found that the notification message itself (not its title) is actually optional, being truly omitted by specifying `msg` to be a non-empty 'empty' string such as `' '`. Method `show_toast` returns a boolean representing whether a notification is sent successfully or not (i.e., if one is already being shown, at least from Python). I also found that initializing multiple instances of the `ToastNotifier` class does not allow multiple corresponding notifications to appear simultaneously in the same way.
 
-Now, specify the chosen 9600/[8-N-1](https://en.wikipedia.org/wiki/8-N-1) serial communication ([COM](https://en.wikipedia.org/wiki/COM_(hardware_interface))) port:
+Now, specify the chosen 9600 / [8-N-1](https://en.wikipedia.org/wiki/8-N-1) serial communication ([COM](https://en.wikipedia.org/wiki/COM_(hardware_interface))) port:
 
 ```python
 port = 'COM4'
@@ -198,7 +210,7 @@ except:
 │   disconnected_tick = time()
 ```
 
-Keep trying to show a notification that the knee angle data logger was disconnected, and of how long ago this event actually occured:
+Keep trying to show a notification that the knee angle data logger was disconnected, and of how long ago this event actually occurred:
 
 ```python
 while True:
@@ -222,7 +234,7 @@ Now,
 
 1.   Trim the last two line-ending ASCII characters: line feed \<LF\> `b'\n'` and carriage return \<CR\> `b'\r'`.
 2.   Typecast (convert) the remaining ASCII characters from a *byte literal* to a float.
-3.   Do the above for all lines but the first and last ones, which may have been cut off.  
+3.   Do the above for all lines but the first one, which may have been cut off.  
      This is a [list comprehension](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions).
 4.   From the list, construct a NumPy `ndarray`, $y$, which is a [time series](https://en.wikipedia.org/wiki/Time_series) of knee angle data.
 
@@ -275,6 +287,8 @@ fig.show()
 ```
 
 ![kneeAngleDataExample.png](https://raw.githubusercontent.com/keeganmjgreen/MSE-420-Project/master/docs/kneeAngleDataLogger/kneeAngleDataExample.png)
+
+This marks the end of the program.
 
 **Appendix**
 ------------
