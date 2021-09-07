@@ -28,6 +28,7 @@ author = 'Keegan Green'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinxemoji.sphinxemoji'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
