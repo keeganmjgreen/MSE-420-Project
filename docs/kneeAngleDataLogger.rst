@@ -15,7 +15,10 @@ Wearing the knee angle data logger:
 Wearing and testing the knee angle data logger by walking around and quickly flexing the knee at different angles:
 
 .. raw:: html
-   <iframe width="420" height="315" src="https://www.youtube.com/embed/P3_gfZtLExc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+
+   <embed>
+       <iframe width="420" height="315" src="https://www.youtube.com/embed/P3_gfZtLExc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   </embed>
 
 ----
 
