@@ -8,6 +8,15 @@ I mentioned in my team's `report <https://raw.github.com/keeganmjgreen/MSE-420-P
 .. image:: kneeAngleDataLogger/fig2.jpg
 .. image:: kneeAngleDataLogger/fig3.jpg
 
+Wearing the knee angle data logger:
+
+.. image:: kneeAngleDataLogger/20220610_185811-2.jpg
+
+Wearing and testing the knee angle data logger by walking around and quickly flexing the knee at different angles:
+
+.. raw:: html
+   <iframe width="420" height="315" src="https://www.youtube.com/embed/P3_gfZtLExc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+
 ----
 
 It turns out that this likely has less of an effect than initially thought. In contrast, however, the lack of `mechanical compliance <https://en.wikipedia.org/wiki/Compliant_mechanism>`_ even with at least some material flexibility, and the heavy rotational inertia of the device about the leg as it sways, are issues. In future work, the latter may be largely solved by making the sizable prototype of its data acquisition electronics more compact and/or offloading it elsewhere along and closer to the leg.
